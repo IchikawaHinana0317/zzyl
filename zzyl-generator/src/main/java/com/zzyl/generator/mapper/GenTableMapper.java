@@ -2,12 +2,14 @@ package com.zzyl.generator.mapper;
 
 import java.util.List;
 import com.zzyl.generator.domain.GenTable;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 业务 数据层
  * 
  * @author ruoyi
  */
+@Mapper
 public interface GenTableMapper
 {
     /**

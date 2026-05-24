@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <delete id="deleteNursingProjectByIds" parameterType="String">
         delete from nursing_project where id in 
-        <foreach item="id" collection="ids" open="(" separator="," close=")">
+        <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>

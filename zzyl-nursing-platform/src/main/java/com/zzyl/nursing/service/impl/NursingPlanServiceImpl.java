@@ -1,5 +1,11 @@
 package com.zzyl.nursing.service.impl;
 
+
+import com.zzyl.nursing.mapper.NursingPlanMapper;
+import com.zzyl.nursing.domain.NursingPlan;
+import com.zzyl.nursing.service.INursingPlanService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import java.util.Arrays;
 import java.util.List;
 import com.zzyl.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +18,10 @@ import com.zzyl.nursing.service.INursingPlanService;
  * 护理计划Service业务层处理
  * 
  * @author hinana
- * @date 2026-05-19
+ * @date 2026-05-24
  */
 @Service
-public class NursingPlanServiceImpl implements INursingPlanService 
+public class NursingPlanServiceImpl extends ServiceImpl<NursingPlanMapper, NursingPlan>  implements INursingPlanService
 {
     @Autowired
     private NursingPlanMapper nursingPlanMapper;
@@ -29,7 +35,7 @@ public class NursingPlanServiceImpl implements INursingPlanService
     @Override
     public NursingPlan selectNursingPlanById(Long id)
     {
-        return nursingPlanMapper.selectNursingPlanById(id);
+               return getById(id);
     }
 
     /**
@@ -53,8 +59,7 @@ public class NursingPlanServiceImpl implements INursingPlanService
     @Override
     public int insertNursingPlan(NursingPlan nursingPlan)
     {
-        nursingPlan.setCreateTime(DateUtils.getNowDate());
-        return nursingPlanMapper.insertNursingPlan(nursingPlan);
+               return save(nursingPlan) ? 1 : 0;
     }
 
     /**
@@ -66,8 +71,8 @@ public class NursingPlanServiceImpl implements INursingPlanService
     @Override
     public int updateNursingPlan(NursingPlan nursingPlan)
     {
-        nursingPlan.setUpdateTime(DateUtils.getNowDate());
-        return nursingPlanMapper.updateNursingPlan(nursingPlan);
+
+               return updateById(nursingPlan) ? 1 : 0;
     }
 
     /**
@@ -79,18 +84,22 @@ public class NursingPlanServiceImpl implements INursingPlanService
     @Override
     public int deleteNursingPlanByIds(Long[] ids)
     {
-        return nursingPlanMapper.deleteNursingPlanByIds(ids);
+                return removeByIds(Arrays.asList(ids)) ? 1 : 0;
     }
+
 
     /**
      * 删除护理计划信息
-     * 
+     *
      * @param id 护理计划主键
      * @return 结果
      */
     @Override
     public int deleteNursingPlanById(Long id)
     {
-        return nursingPlanMapper.deleteNursingPlanById(id);
+        return removeById(id) ? 1 : 0;
     }
+
 }
+
+

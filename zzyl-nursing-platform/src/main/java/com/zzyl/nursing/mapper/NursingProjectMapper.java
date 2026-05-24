@@ -1,19 +1,18 @@
 package com.zzyl.nursing.mapper;
 
-import com.zzyl.nursing.domain.NursingProject;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import com.zzyl.nursing.domain.NursingProject;
 
 /**
  * 护理项目Mapper接口
  * 
- * @author ruoyi
- * @date 2026-05-19
+ * @author hinana
+ * @date 2026-05-24
  */
 @Mapper
-public interface NursingProjectMapper 
+public interface NursingProjectMapper extends BaseMapper<NursingProject>
 {
     /**
      * 查询护理项目
@@ -61,5 +60,5 @@ public interface NursingProjectMapper
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteNursingProjectByIds(@Param("ids") Long[] ids);
+    public int deleteNursingProjectByIds(Long[] ids);
 }

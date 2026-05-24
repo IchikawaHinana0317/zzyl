@@ -1,5 +1,7 @@
 package com.zzyl.nursing.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import com.zzyl.nursing.domain.NursingLevel;
 
@@ -7,9 +9,10 @@ import com.zzyl.nursing.domain.NursingLevel;
  * 护理等级Mapper接口
  * 
  * @author hinana
- * @date 2026-05-19
+ * @date 2026-05-24
  */
-public interface NursingLevelMapper 
+@Mapper
+public interface NursingLevelMapper extends BaseMapper<NursingLevel>
 {
     /**
      * 查询护理等级

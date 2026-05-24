@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>velocity快速入门</title>
+</head>
+<body>
+
+<h3>在${message1}里，我最喜欢的角色是${message2}</h3>
+
+</body>
+</html>

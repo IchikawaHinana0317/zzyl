@@ -1,5 +1,11 @@
 package com.zzyl.nursing.service.impl;
 
+
+import com.zzyl.nursing.mapper.NursingLevelMapper;
+import com.zzyl.nursing.domain.NursingLevel;
+import com.zzyl.nursing.service.INursingLevelService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import java.util.Arrays;
 import java.util.List;
 import com.zzyl.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +18,10 @@ import com.zzyl.nursing.service.INursingLevelService;
  * 护理等级Service业务层处理
  * 
  * @author hinana
- * @date 2026-05-19
+ * @date 2026-05-24
  */
 @Service
-public class NursingLevelServiceImpl implements INursingLevelService 
+public class NursingLevelServiceImpl extends ServiceImpl<NursingLevelMapper, NursingLevel>  implements INursingLevelService
 {
     @Autowired
     private NursingLevelMapper nursingLevelMapper;
@@ -29,7 +35,7 @@ public class NursingLevelServiceImpl implements INursingLevelService
     @Override
     public NursingLevel selectNursingLevelById(Long id)
     {
-        return nursingLevelMapper.selectNursingLevelById(id);
+               return getById(id);
     }
 
     /**
@@ -53,8 +59,7 @@ public class NursingLevelServiceImpl implements INursingLevelService
     @Override
     public int insertNursingLevel(NursingLevel nursingLevel)
     {
-        nursingLevel.setCreateTime(DateUtils.getNowDate());
-        return nursingLevelMapper.insertNursingLevel(nursingLevel);
+               return save(nursingLevel) ? 1 : 0;
     }
 
     /**
@@ -66,8 +71,8 @@ public class NursingLevelServiceImpl implements INursingLevelService
     @Override
     public int updateNursingLevel(NursingLevel nursingLevel)
     {
-        nursingLevel.setUpdateTime(DateUtils.getNowDate());
-        return nursingLevelMapper.updateNursingLevel(nursingLevel);
+
+               return updateById(nursingLevel) ? 1 : 0;
     }
 
     /**
@@ -79,18 +84,21 @@ public class NursingLevelServiceImpl implements INursingLevelService
     @Override
     public int deleteNursingLevelByIds(Long[] ids)
     {
-        return nursingLevelMapper.deleteNursingLevelByIds(ids);
+                return removeByIds(Arrays.asList(ids)) ? 1 : 0;
     }
 
     /**
      * 删除护理等级信息
-     * 
+     *
      * @param id 护理等级主键
      * @return 结果
      */
     @Override
     public int deleteNursingLevelById(Long id)
     {
-        return nursingLevelMapper.deleteNursingLevelById(id);
+        return removeById(id) ? 1 : 0;
     }
+
 }
+
+
