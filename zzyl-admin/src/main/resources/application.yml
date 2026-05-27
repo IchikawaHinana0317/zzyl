@@ -100,7 +100,7 @@ token:
 # MyBatisPlus配置
 mybatis-plus:
   # 搜索指定包别名
-  typeAliasesPackage: com.zzyl.**.domain
+  typeAliasesPackage: com.zzyl.**.domain,com.zzyl.**.vo
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/**/*Mapper.xml
   # 全局配置
@@ -132,3 +132,8 @@ xss:
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
 
+# 阿里云OSS相关配置
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: zzyl-hinana

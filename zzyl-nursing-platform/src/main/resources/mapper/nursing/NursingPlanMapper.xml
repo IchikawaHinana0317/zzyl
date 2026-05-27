@@ -34,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
+
     <insert id="insertNursingPlan" parameterType="NursingPlan" useGeneratedKeys="true" keyProperty="id">
         insert into nursing_plan
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -83,4 +84,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="getAvailable" resultType="NursingPlan">
+        select p.id, p.plan_name
+        from nursing_plan p
+                 left join nursing_level l on p.id = l.plan_id
+        where p.status = 1
+          and l.id is null
+    </select>
+
+    <select id="getAvailableByLevelId" resultType="NursingPlan">
+        select p.id, p.plan_name
+        from nursing_plan p
+                 left join nursing_level l on p.id = l.plan_id
+        where p.status = 1
+          and (l.id is null or l.id = #{levelId})
+    </select>
 </mapper>

@@ -98,4 +98,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="getAll" resultType="NursingProjectVo">
+        select id value,name label from nursing_project where status = 1
+    </select>
 </mapper>

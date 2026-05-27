@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.Arrays;
 import java.util.List;
 import com.zzyl.common.utils.DateUtils;
+import com.zzyl.nursing.vo.NursingProjectVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.zzyl.nursing.mapper.NursingProjectMapper;
@@ -97,6 +98,16 @@ public class NursingProjectServiceImpl extends ServiceImpl<NursingProjectMapper,
     public int deleteNursingProjectById(Long id)
     {
         return removeById(id) ? 1 : 0;
+    }
+
+    /**
+     * 查询所有护理项目名称与ID
+     *
+     * @return 结果
+     */
+    @Override
+    public List<NursingProjectVo> getAll() {
+        return nursingProjectMapper.getAll();
     }
 
     }

@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.Arrays;
 import java.util.List;
 import com.zzyl.common.utils.DateUtils;
+import com.zzyl.nursing.vo.NursingLevelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.zzyl.nursing.mapper.NursingLevelMapper;
@@ -45,9 +46,9 @@ public class NursingLevelServiceImpl extends ServiceImpl<NursingLevelMapper, Nur
      * @return 护理等级
      */
     @Override
-    public List<NursingLevel> selectNursingLevelList(NursingLevel nursingLevel)
+    public List<NursingLevelVo> selectNursingLevelVoList(NursingLevel nursingLevel)
     {
-        return nursingLevelMapper.selectNursingLevelList(nursingLevel);
+        return nursingLevelMapper.selectNursingLevelVoList(nursingLevel);
     }
 
     /**

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import com.zzyl.nursing.domain.NursingPlan;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 护理计划Mapper接口
@@ -61,4 +62,21 @@ public interface NursingPlanMapper extends BaseMapper<NursingPlan>
      * @return 结果
      */
     public int deleteNursingPlanByIds(Long[] ids);
+
+    /**
+     * 查询未被绑定的护理计划
+     *
+     * @return 护理计划列表
+     */
+    List<NursingPlan> getAvailable();
+
+    /**
+     * 查询未被绑定的护理计划以及当前护理等级绑定的计划
+     *
+     * @param levelId 护理等级id
+     * @return 护理计划列表
+     */
+    List<NursingPlan> getAvailableByLevelId(@Param("levelId") Long levelId);
+
+
 }
