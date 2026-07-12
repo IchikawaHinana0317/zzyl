@@ -1,58 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <configuration>
 
-    <property name="log.path" value="${LOG_PATH:-/app/logs}" />
+    <!--
+        Docker 中默认写入 /app/logs；
+        可通过环境变量 LOG_PATH 覆盖。
+    -->
+    <property
+            name="log.path"
+            value="${LOG_PATH:-/app/logs}"
+    />
 
+    <!-- 普通文本日志格式 -->
     <property
             name="log.pattern"
-            value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"
+            value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%method,%line] - %msg%n"
     />
+
+    <!-- ===================================================== -->
+    <!-- 1. 控制台输出：必须先定义，再被 root 引用 -->
+    <!-- ===================================================== -->
 
     <appender
             name="console"
             class="ch.qos.logback.core.ConsoleAppender"
     >
-        <encoder>
+        <encoder charset="UTF-8">
             <pattern>${log.pattern}</pattern>
         </encoder>
     </appender>
+
+    <!-- ===================================================== -->
+    <!-- 2. Logstash TCP 输出 -->
+    <!-- ===================================================== -->
 
     <appender
             name="logstash"
             class="net.logstash.logback.appender.LogstashTcpSocketAppender"
     >
+        <!--
+            Docker 中默认通过宿主机 5044 端口访问 Logstash；
+            可通过 LOGSTASH_DESTINATION 覆盖。
+        -->
         <destination>
             ${LOGSTASH_DESTINATION:-host.docker.internal:5044}
         </destination>
+
+        <keepAliveDuration>5 minutes</keepAliveDuration>
 
         <encoder
                 charset="UTF-8"
                 class="net.logstash.logback.encoder.LogstashEncoder"
         >
+            <!-- 给每条日志附加应用名称 -->
             <customFields>
                 {"app":"zzyl-admin"}
             </customFields>
         </encoder>
     </appender>
 
-    <!-- 这里继续保留原有 file_info、file_error、sys-user -->
+    <!-- ===================================================== -->
+    <!-- 3. 普通系统日志文件 -->
+    <!-- ===================================================== -->
 
-    <logger name="com.zzyl" level="info" />
-    <logger name="org.springframework" level="warn" />
+    <appender
+            name="file_info"
+            class="ch.qos.logback.core.rolling.RollingFileAppender"
+    >
+        <file>${log.path}/sys-info.log</file>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"
+        >
+            <fileNamePattern>
+                ${log.path}/sys-info.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <encoder charset="UTF-8">
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+
+        <!-- 记录 INFO 及以上日志 -->
+        <filter
+                class="ch.qos.logback.classic.filter.ThresholdFilter"
+        >
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <!-- ===================================================== -->
+    <!-- 4. 错误日志文件 -->
+    <!-- ===================================================== -->
+
+    <appender
+            name="file_error"
+            class="ch.qos.logback.core.rolling.RollingFileAppender"
+    >
+        <file>${log.path}/sys-error.log</file>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"
+        >
+            <fileNamePattern>
+                ${log.path}/sys-error.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <encoder charset="UTF-8">
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+
+        <!-- 只记录 ERROR -->
+        <filter
+                class="ch.qos.logback.classic.filter.LevelFilter"
+        >
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- ===================================================== -->
+    <!-- 5. 用户操作日志文件 -->
+    <!-- ===================================================== -->
+
+    <appender
+            name="sys-user"
+            class="ch.qos.logback.core.rolling.RollingFileAppender"
+    >
+        <file>${log.path}/sys-user.log</file>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"
+        >
+            <fileNamePattern>
+                ${log.path}/sys-user.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <encoder charset="UTF-8">
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ===================================================== -->
+    <!-- 6. Logger 配置：必须放在所有 appender 定义之后 -->
+    <!-- ===================================================== -->
 
     <logger
+            name="com.zzyl"
+            level="DEBUG"
+    />
+
+    <logger
+            name="org.springframework"
+            level="WARN"
+    />
+
+    <!--
+        单独记录 sys-user 日志；
+        additivity=false 避免同一条日志重复进入 root。
+    -->
+    <logger
             name="sys-user"
-            level="info"
+            level="INFO"
             additivity="false"
     >
-        <appender-ref ref="sys-user" />
+        <appender-ref ref="sys-user"/>
     </logger>
 
-    <root level="info">
-        <appender-ref ref="console" />
-        <appender-ref ref="logstash" />
-        <appender-ref ref="file_info" />
-        <appender-ref ref="file_error" />
+    <!-- ===================================================== -->
+    <!-- 7. 根日志：整个文件只能有一个 root，且必须放在最后 -->
+    <!-- ===================================================== -->
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="logstash"/>
+        <appender-ref ref="file_info"/>
+        <appender-ref ref="file_error"/>
     </root>
 
 </configuration>
