@@ -31,12 +31,10 @@ pipeline {
     environment {
         IMAGE_NAME = 'zzyl-admin'
         CONTAINER_NAME = 'zzyl-admin'
-
-        // Windows本机端口
         HOST_PORT = '9000'
-
-        // Spring Boot容器内部端口
         CONTAINER_PORT = '9000'
+
+        JAVA_TOOL_OPTIONS = '-Dfile.encoding=UTF-8'
     }
 
     stages {
@@ -274,7 +272,13 @@ pipeline {
                     encoding: 'UTF-8',
                     script: """
                         docker ps -a --filter "name=${env.CONTAINER_NAME}"
-                        docker logs --tail 200 ${env.CONTAINER_NAME}
+
+                        docker inspect ${env.CONTAINER_NAME} >nul 2>&1
+                        if %ERRORLEVEL% EQU 0 (
+                            docker logs --tail 200 ${env.CONTAINER_NAME}
+                        ) else (
+                            echo 容器 ${env.CONTAINER_NAME} 尚未创建，不读取容器日志
+                        )
                     """
                 )
             }
