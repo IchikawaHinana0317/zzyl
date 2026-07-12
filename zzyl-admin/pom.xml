@@ -63,6 +63,12 @@
             <artifactId>zzyl-generator</artifactId>
         </dependency>
 
+        <!--测试起步依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
         <!-- 护理业务模块-->
         <dependency>
             <groupId>com.zzyl</groupId>
