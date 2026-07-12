@@ -206,7 +206,6 @@ pipeline {
                     encoding: 'UTF-8',
                     script: """
                         docker build ^
-                          --pull ^
                           --tag ${env.IMAGE_NAME}:${params.DOCKER_TAG} ^
                           --file zzyl-admin\\Dockerfile ^
                           zzyl-admin
