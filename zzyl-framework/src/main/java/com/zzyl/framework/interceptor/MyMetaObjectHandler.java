@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.zzyl.common.core.domain.model.LoginUser;
 import com.zzyl.common.utils.DateUtils;
 import com.zzyl.common.utils.SecurityUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+
+import static com.zzyl.common.utils.SecurityUtils.getLoginUser;
 
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
@@ -30,11 +33,16 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
      *
      * @return 登录人ID
      */
-    public Long getLoginUser() {
-        LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (loginUser != null) {
-            return loginUser.getUserId();
+    public Long getLoginUserId() {
+        // 获取到当前登录人的信息
+        try {
+            LoginUser loginUser = getLoginUser();
+            if (ObjectUtils.isNotEmpty(loginUser)) {
+                return loginUser.getUserId();
+            }
+            return 1L;
+        } catch (Exception e) {
+            return 1L;
         }
-        return 1L;
     }
 }

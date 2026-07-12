@@ -65,7 +65,7 @@ public interface NursingPlanMapper extends BaseMapper<NursingPlan>
 
     /**
      * 查询未被绑定的护理计划
-     *
+     *  nursing_plan.id 没有出现在 nursing_level.plan_id 中，就表示这个护理计划还没有被护理等级绑定，所以可以在新增护理等级时作为下拉选项。
      * @return 护理计划列表
      */
     List<NursingPlan> getAvailable();

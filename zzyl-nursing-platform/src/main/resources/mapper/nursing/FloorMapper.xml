@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateFloor" parameterType="Floor">
         update floor
         <trim prefix="SET" suffixOverrides=",">
-            <if test="name != null">name = #{name},</if>
+            <if test="name != null">name = #{name},</if>zzyl
             <if test="code != null">code = #{code},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
@@ -80,13 +80,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <select id="selectAllByNur" resultType="com.zzyl.nursing.domain.Floor">
-        select f.*
+        select distinct f.*
         from floor f
-                 left join room r on r.floor_id = f.id
-                 left join bed b on b.room_id = r.id
-                 left join elder e on e.bed_id = b.id
+                 join room r on r.floor_id = f.id
+                 join bed b on b.room_id = r.id
         where b.bed_status = 1
-        group by f.id
-        order by code, create_time desc
+        order by f.code, f.create_time desc
+    </select>
+
+    <!--根据状态获取房间和床位信息-->
+
+    <resultMap id="TreeVoResultMap" type="TreeVo">
+        <id column="fid" property="value"></id>
+        <result column="name" property="label"></result>
+        <collection property="children" ofType="TreeVo">
+            <id column="rid" property="value"></id>
+            <result column="code" property="label"></result>
+            <collection property="children" ofType="TreeVo">
+                <id column="bid" property="value"></id>
+                <result column="bed_number" property="label"></result>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="getRoomAndBedByBedStatus" resultMap="TreeVoResultMap">
+        select f.id fid, f.name, r.id rid, r.code, b.id bid, b.bed_number
+        from floor f
+                 left join room r on f.id = r.floor_id
+                 left join bed b on r.id = b.room_id
+        where b.bed_status = #{status}
+        order by f.id, r.id, b.id
     </select>
 </mapper>

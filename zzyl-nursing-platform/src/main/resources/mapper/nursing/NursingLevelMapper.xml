@@ -37,6 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
+
+
+
     <insert id="insertNursingLevel" parameterType="NursingLevel" useGeneratedKeys="true" keyProperty="id">
         insert into nursing_level
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -92,4 +95,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+    <select id="listAll" resultMap="NursingLevelResult">
+        <include refid="selectNursingLevelVo"/>
+        where status = 1
+    </select>
 </mapper>

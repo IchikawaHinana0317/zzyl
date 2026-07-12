@@ -60,4 +60,10 @@ public interface INursingLevelService extends IService<NursingLevel>
      * @return 结果
      */
     public int deleteNursingLevelById(Long id);
+
+    /**
+     * 查询所有护理等级
+     * @return  护理等级列表
+     */
+    public List<NursingLevel> listAll();
 }

@@ -62,4 +62,6 @@ public interface BedMapper extends BaseMapper<Bed>
      * @return 结果
      */
     public int deleteBedByIds(Long[] ids);
+
+
 }

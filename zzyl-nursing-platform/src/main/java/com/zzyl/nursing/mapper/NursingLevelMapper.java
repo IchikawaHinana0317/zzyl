@@ -62,4 +62,10 @@ public interface NursingLevelMapper extends BaseMapper<NursingLevel>
      * @return 结果
      */
     public int deleteNursingLevelByIds(Long[] ids);
+
+    /**
+     * 获取护理等级列表
+     * @return 护理等级列表
+     */
+    List<NursingLevel> listAll();
 }
