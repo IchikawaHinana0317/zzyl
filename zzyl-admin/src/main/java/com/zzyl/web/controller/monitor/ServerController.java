@@ -10,7 +10,7 @@ import com.zzyl.framework.web.domain.Server;
 /**
  * 服务器监控
  * 
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 @RequestMapping("/monitor/server")

@@ -8,7 +8,7 @@
     -->
     <property
             name="log.path"
-            value="${LOG_PATH:-/app/logs}"
+            value="${LOG_PATH:-./logs}"
     />
 
     <!-- 普通文本日志格式 -->
@@ -43,7 +43,7 @@
             可通过 LOGSTASH_DESTINATION 覆盖。
         -->
         <destination>
-            ${LOGSTASH_DESTINATION:-host.docker.internal:5044}
+            ${LOGSTASH_DESTINATION:-localhost:5044}
         </destination>
 
         <keepAliveDuration>5 minutes</keepAliveDuration>

@@ -39,7 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectRoomTypeVo"/>
         where id = #{id}
     </select>
-        
+
+
     <insert id="insertRoomType" parameterType="RoomType" useGeneratedKeys="true" keyProperty="id">
         insert into room_type
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -98,4 +99,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+    <select id="findRoomTypeListByStatus" parameterType="Integer" resultMap="RoomTypeResult">
+        <include refid="selectRoomTypeVo"/>
+        where status= #{status}
+    </select>
 </mapper>

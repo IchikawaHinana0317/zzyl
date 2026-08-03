@@ -28,7 +28,7 @@ import com.zzyl.system.service.ISysDictTypeService;
 /**
  * 数据字典信息
  * 
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 @RequestMapping("/system/dict/data")

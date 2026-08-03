@@ -14,7 +14,7 @@ import com.zzyl.system.service.ISysConfigService;
 /**
  * 注册验证
  * 
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 public class SysRegisterController extends BaseController

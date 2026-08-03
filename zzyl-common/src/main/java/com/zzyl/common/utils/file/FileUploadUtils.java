@@ -18,7 +18,7 @@ import com.zzyl.common.utils.uuid.Seq;
 /**
  * 文件上传工具类
  *
- * @author ruoyi
+ * @author hinana
  */
 public class FileUploadUtils
 {

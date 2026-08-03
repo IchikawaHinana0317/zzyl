@@ -12,7 +12,7 @@ import com.zzyl.common.utils.http.HttpUtils;
 /**
  * 获取地址类
  * 
- * @author ruoyi
+ * @author hinana
  */
 public class AddressUtils
 {

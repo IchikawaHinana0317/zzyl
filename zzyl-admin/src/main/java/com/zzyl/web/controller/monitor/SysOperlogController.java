@@ -22,7 +22,7 @@ import com.zzyl.system.service.ISysOperLogService;
 /**
  * 操作日志记录
  * 
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 @RequestMapping("/monitor/operlog")

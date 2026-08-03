@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzyl.nursing.mapper.NursingElderMapper">
+
+<select id="selectUserByElderId" resultType="SysUser">
+
+    select tu.user_id as userId, tu.nick_name
+    from nursing_elder ne, sys_user tu
+    where ne.elder_id = #{elderId} and tu.user_id = ne.nursing_id and tu.status = 0
+</select>
+
+</mapper>

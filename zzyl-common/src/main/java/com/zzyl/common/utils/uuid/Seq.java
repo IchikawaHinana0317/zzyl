@@ -5,7 +5,7 @@ import com.zzyl.common.utils.DateUtils;
 import com.zzyl.common.utils.StringUtils;
 
 /**
- * @author ruoyi 序列生成类
+ * @author hinana 序列生成类
  */
 public class Seq
 {

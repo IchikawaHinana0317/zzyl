@@ -17,7 +17,7 @@ import com.zzyl.common.enums.HttpMethod;
 /**
  * 防止XSS攻击的过滤器
  * 
- * @author ruoyi
+ * @author hinana
  */
 public class XssFilter implements Filter
 {

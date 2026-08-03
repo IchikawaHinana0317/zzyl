@@ -104,12 +104,6 @@ public class RoomTypeServiceImpl extends ServiceImpl<RoomTypeMapper, RoomType> i
      */
     @Override
     public List<RoomType> findRoomTypeListByStatus(Integer status) {
-
-        if(ObjectUtil.isEmpty(status)){
-            throw new BaseException("参数为空");
-        }
-        LambdaQueryWrapper<RoomType> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(RoomType::getStatus,status);
-        return list(wrapper);
+       return roomTypeMapper.findRoomTypeListByStatus(status);
     }
 }

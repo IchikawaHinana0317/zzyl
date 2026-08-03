@@ -9,7 +9,7 @@ import com.zzyl.common.utils.StringUtils;
 /**
  * 获取IP方法
  * 
- * @author ruoyi
+ * @author hinana
  */
 public class IpUtils
 {

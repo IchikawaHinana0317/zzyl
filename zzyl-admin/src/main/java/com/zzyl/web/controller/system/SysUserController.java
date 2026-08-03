@@ -3,8 +3,11 @@ package com.zzyl.web.controller.system;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +38,7 @@ import com.zzyl.system.service.ISysUserService;
 /**
  * 用户信息
  * 
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 @RequestMapping("/system/user")
@@ -52,6 +55,10 @@ public class SysUserController extends BaseController
 
     @Autowired
     private ISysPostService postService;
+
+    @Value("${dept.nursingId}")
+    private String nursingId;
+
 
     /**
      * 获取用户列表
@@ -253,4 +260,19 @@ public class SysUserController extends BaseController
     {
         return success(deptService.selectDeptTreeList(dept));
     }
+
+    /**
+     * 根据部门编号，查询员工列表
+     */
+    @ApiOperation("根据部门编号，查询员工列表")
+    @GetMapping("/listByDeptId")
+    public AjaxResult getUserListByDept(Long deptId) {
+        List<SysUser> userListByDept = userService.getUserListByDept(Long.valueOf(nursingId));
+        return AjaxResult.success(userListByDept);
+    }
+
+
+
+
+
 }

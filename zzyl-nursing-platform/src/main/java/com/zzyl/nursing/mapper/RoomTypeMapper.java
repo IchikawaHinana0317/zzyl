@@ -62,4 +62,14 @@ public interface RoomTypeMapper extends BaseMapper<RoomType>
      * @return 结果
      */
     public int deleteRoomTypeByIds(Long[] ids);
+
+
+
+    /**
+     * 按照状态查询房间类型
+     * @param status
+     * @return
+     */
+    public List<RoomType> findRoomTypeListByStatus(Integer status);
+
 }

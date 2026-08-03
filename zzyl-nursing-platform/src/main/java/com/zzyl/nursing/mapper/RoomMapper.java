@@ -74,4 +74,11 @@ public interface RoomMapper extends BaseMapper<Room>
      * @return 房间相关数据
      */
     RoomVo getRoomById(Long id);
+
+    /**
+     * 获取楼层所有房间（智能床位）
+     * @param floorId 楼层ID
+     * @return
+     */
+    List<RoomVo> getRoomsWithDeviceByFloorId(Long floorId);
 }

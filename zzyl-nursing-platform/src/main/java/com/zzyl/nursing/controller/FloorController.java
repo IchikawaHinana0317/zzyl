@@ -7,6 +7,7 @@ import com.zzyl.common.core.domain.R;
 import com.zzyl.common.enums.BusinessType;
 import com.zzyl.nursing.domain.Floor;
 import com.zzyl.nursing.service.IFloorService;
+import com.zzyl.nursing.vo.FloorVo;
 import com.zzyl.nursing.vo.TreeVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -107,5 +108,15 @@ public class FloorController extends BaseController
     public R<List<TreeVo>> getRoomAndBedByBedStatus(@ApiParam(value = "床位状态(未入住0, 已入住1)", required = true) @PathVariable("status") Integer status) {
         List<TreeVo> list = floorService.getRoomAndBedByBedStatus(status);
         return R.ok(list);
+    }
+
+    /**
+     * 查询智能楼层
+     * @return
+     */
+    @GetMapping("/getAllFloorsWithDevice")
+    @ApiOperation("查询所有楼层（智能设备）")
+    public R<List<FloorVo>> getAllFloorsWithDevice() {
+        return R.ok(floorService.getAllFloorsWithDevice());
     }
 }

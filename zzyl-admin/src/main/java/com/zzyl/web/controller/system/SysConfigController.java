@@ -25,7 +25,7 @@ import com.zzyl.system.service.ISysConfigService;
 /**
  * 参数配置 信息操作处理
  * 
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 @RequestMapping("/system/config")

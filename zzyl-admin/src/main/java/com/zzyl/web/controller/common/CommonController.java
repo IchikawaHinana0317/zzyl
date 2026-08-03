@@ -26,7 +26,7 @@ import com.zzyl.framework.config.ServerConfig;
 /**
  * 通用请求处理
  * 
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 @RequestMapping("/common")

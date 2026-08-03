@@ -8,7 +8,7 @@ import com.zzyl.common.utils.StringUtils;
 /**
  * 操作消息提醒
  * 
- * @author ruoyi
+ * @author hinana
  */
 public class AjaxResult extends HashMap<String, Object>
 {

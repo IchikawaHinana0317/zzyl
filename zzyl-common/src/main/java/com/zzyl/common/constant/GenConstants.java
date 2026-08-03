@@ -3,7 +3,7 @@ package com.zzyl.common.constant;
 /**
  * 代码生成通用常量
  * 
- * @author ruoyi
+ * @author hinana
  */
 public class GenConstants
 {

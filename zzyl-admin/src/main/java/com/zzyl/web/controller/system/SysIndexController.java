@@ -9,7 +9,7 @@ import com.zzyl.common.utils.StringUtils;
 /**
  * 首页
  *
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 public class SysIndexController

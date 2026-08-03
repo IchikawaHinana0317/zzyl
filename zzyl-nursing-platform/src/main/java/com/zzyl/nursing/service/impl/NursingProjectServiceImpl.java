@@ -2,7 +2,10 @@ package com.zzyl.nursing.service.impl;
 
 
 import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zzyl.common.constant.CacheConstants;
+import com.zzyl.common.core.page.TableDataInfo;
 import com.zzyl.nursing.mapper.NursingProjectMapper;
 import com.zzyl.nursing.domain.NursingProject;
 import com.zzyl.nursing.service.INursingProjectService;
@@ -149,5 +152,7 @@ public class NursingProjectServiceImpl extends ServiceImpl<NursingProjectMapper,
         // 删除缓存
         redisTemplate.delete(CacheConstants.NURSING_PROJECT_ALL_KEY);
     }
+
+
 
     }

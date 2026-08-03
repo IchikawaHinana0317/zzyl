@@ -33,7 +33,6 @@ server:
 
 # 日志配置
 logging:
-  config: classpath:logback-logstash.xml
   level:
     com.zzyl: debug
     org.springframework: warn
@@ -107,9 +106,9 @@ spring:
       # 最小连接池数量
       minIdle: 10
       # 最大连接池数量
-      maxActive: 20
+      maxActive: 60
       # 配置获取连接等待超时的时间
-      maxWait: 60000
+      maxWait: 120000
       # 配置连接超时时间
       connectTimeout: 30000
       # 配置网络超时时间
@@ -123,7 +122,7 @@ spring:
       # 配置检测连接是否有效
       validationQuery: SELECT 1 FROM DUAL
       testWhileIdle: true
-      testOnBorrow: false
+      testOnBorrow: true
       testOnReturn: false
       webStatFilter:
         enabled: true
@@ -158,7 +157,7 @@ token:
 # MyBatisPlus配置
 mybatis-plus:
   # 搜索指定包别名
-  typeAliasesPackage: com.zzyl.**.domain,com.zzyl.**.vo
+  typeAliasesPackage: com.zzyl.**.domain,com.zzyl.**.vo,com.zzyl.**.dto
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/**/*Mapper.xml
   # 全局配置
@@ -202,3 +201,28 @@ baidu:
     apiKey: bce-v3/ALTAK-zUImUWbA7zgPV6UsgPtXH/22005700e61f66e124980c265e6a12ddad53aa05
     baseUrl: https://qianfan.baidubce.com/v2/
     model: ernie-5.1
+
+# 微信小程序相关配置
+wechat:
+  appId: wx938be787ce75a86c
+  appSecret: efa5f7e1dc9950e78c49bfce238f5cff
+
+dept:
+  nursingId: 201
+
+huaweicloud:
+  ak: HPUAKCCFWROTQKWO3EPT
+  sk: dnpbmkUES3vZSmrdDs6JebKsnW6mB5egsVKghqpq
+  #如果是上海一，请填写"cn-east-3"；如果是北京四，请填写"cn-north-4";
+  regionId: cn-north-4
+  endpoint: b5cec79d6d.st1.iotda-app.cn-north-4.myhuaweicloud.com
+  projectId: e76e6437ff5443ab83b531b93e8cea6c
+  #amqp相关配置 下一章课程接收设备数据使用
+  host: b5cec79d6d.st1.iotda-app.cn-north-4.myhuaweicloud.com
+  accessKey: z2yq9eN1
+  accessCode: GjuBr9eS6vsyroLgY4lJVsNuu8egHZdK
+  queueName: DefaultQueue   #默认无需改动
+
+alert:
+  deviceMaintainerRole: 维修工
+  managerRole: 超级管理员

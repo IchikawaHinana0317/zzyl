@@ -3,7 +3,7 @@ package com.zzyl.common.constant;
 /**
  * 缓存的key 常量
  * 
- * @author ruoyi
+ * @author hinana
  */
 public class CacheConstants
 {
@@ -63,4 +63,14 @@ public class CacheConstants
     public static final String REPORT_KEY = "health:report:";
 
 
+    public static final String IOT_ALL_PRODUCT_LIST = "iot:all_product_list";
+    public static final String IOT_DEVICE_LAST_DATA = "iot:device_last_data";
+    /**
+     * 报警规则需要的连续触发次数，缓存前缀
+     */
+    public static final String ALERT_TRIGGER_COUNT_PREFIX = "iot:alert_trigger_count:";
+    /**
+     * 报警规则沉默周期，缓存前缀
+     */
+    public static final String ALERT_SILENT_PREFIX = "iot:alert_silent:";
 }

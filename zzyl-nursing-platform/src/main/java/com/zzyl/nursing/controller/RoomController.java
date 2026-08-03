@@ -39,12 +39,7 @@ public class RoomController extends BaseController
         return R.ok(list);
     }
 
-    @GetMapping("/getRoomsByFloorId/{floorId}")
-    @ApiOperation("获取所有房间（入住配置）")
-    public R<List<RoomVo>> getRoomsByFloorId(@ApiParam(value = "楼层ID", required = true)  @PathVariable Long floorId) {
-        List<RoomVo> list = roomService.getRoomsByFloorId(floorId);
-        return R.ok(list);
-    }
+
     /**
      * 查询房间列表
      */
@@ -117,6 +112,25 @@ public class RoomController extends BaseController
     public R<RoomVo> getRoomById(@ApiParam(value = "房间ID", required = true) @PathVariable("id") Long id){
         RoomVo roomVo = roomService.getRoomById(id);
         return R.ok(roomVo);
+    }
+    @GetMapping("/getRoomsByFloorId/{floorId}")
+    @ApiOperation("获取所有房间（入住配置）")
+    public R<List<RoomVo>> getRoomsByFloorId(@ApiParam(value = "楼层ID", required = true)  @PathVariable Long floorId) {
+        List<RoomVo> list = roomService.getRoomsByFloorId(floorId);
+        return R.ok(list);
+    }
+
+
+    /**
+     * 获取楼层所有房间（智能床位）
+     * @param floorId 楼层ID
+     * @return
+     */
+
+    @GetMapping("/getRoomsWithDeviceByFloorId/{floorId}")
+    @ApiOperation("获取所有房间信息（智能床位）")
+    public R<List<RoomVo>> getRoomsWithDeviceByFloorId(@PathVariable(name = "floorId") Long floorId) {
+        return R.ok(roomService.getRoomsWithDeviceByFloorId(floorId));
     }
 
 }

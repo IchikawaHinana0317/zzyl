@@ -2,6 +2,8 @@ package com.zzyl.nursing.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
+
+import com.zzyl.common.core.page.TableDataInfo;
 import com.zzyl.nursing.domain.NursingProject;
 import com.zzyl.nursing.vo.NursingProjectVo;
 
@@ -66,4 +68,7 @@ public interface INursingProjectService extends IService<NursingProject>
      * @return
      */
     List<NursingProjectVo> getAll();
+
+
+
 }

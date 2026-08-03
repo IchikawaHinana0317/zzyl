@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by f.code, f.create_time desc
     </select>
 
-    <!--根据状态获取房间和床位信息-->
+    <!--根据状态获取房间和床位信息，SQL 返回重复的扁平行，MyBatis 利用嵌套 collection 和各层 <id> 自动去重、分组并组装成树。-->
 
     <resultMap id="TreeVoResultMap" type="TreeVo">
         <id column="fid" property="value"></id>
@@ -110,5 +110,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  left join bed b on r.id = b.room_id
         where b.bed_status = #{status}
         order by f.id, r.id, b.id
+    </select>
+
+    <select id="getAllFloorsWithDevice" resultType="com.zzyl.nursing.vo.FloorVo">
+        select f.id, f.name, f.code
+        from floor f
+                 left join room r on f.id = r.floor_id
+                 left join bed b on r.id = b.room_id
+                 left join device rd on rd.binding_location = r.id and rd.location_type = 1 and rd.physical_location_type = 1
+                 left join device bd on bd.binding_location = b.id and bd.location_type = 1 and bd.physical_location_type = 2
+        where (rd.id is not null or bd.id is not null)
+        group by f.id
     </select>
 </mapper>

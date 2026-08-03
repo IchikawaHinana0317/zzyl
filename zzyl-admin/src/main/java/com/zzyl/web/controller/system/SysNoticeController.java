@@ -23,7 +23,7 @@ import com.zzyl.system.service.ISysNoticeService;
 /**
  * 公告 信息操作处理
  * 
- * @author ruoyi
+ * @author hinana
  */
 @RestController
 @RequestMapping("/system/notice")

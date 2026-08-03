@@ -202,3 +202,24 @@ baidu:
     apiKey: bce-v3/ALTAK-zUImUWbA7zgPV6UsgPtXH/22005700e61f66e124980c265e6a12ddad53aa05
     baseUrl: https://qianfan.baidubce.com/v2/
     model: ernie-5.1
+
+# 微信小程序相关配置
+wechat:
+  appId: wx938be787ce75a86c
+  appSecret: efa5f7e1dc9950e78c49bfce238f5cff
+
+dept:
+  nursingId: 201
+
+huaweicloud:
+  ak: UTVLYVJKFVGYVEFFWG
+  sk: WkEWqfwZoFlLwbR5Kq5NmWTLmj71WhRXe
+  #如果是上海一，请填写"cn-east-3"；如果是北京四，请填写"cn-north-4";
+  regionId: cn-east-3
+  endpoint: 38e7abf.st1.iotda-app.cn-east-3.myhuaweicloud.com
+  projectId: 57ee9b4c827a44cb94319a077f0fe7cb
+  #amqp相关配置 下一章课程接收设备数据使用
+  host: 38e7abedbf.st1.iotda-app.cn-east-3.myhuaweicloud.com
+  accessKey: S25ZeTC5
+  accessCode: a4fKpE5zbk0nbGNJU0d1bKkJNRZxQzlp
+  queueName: DefaultQueue   #默认无需改动

@@ -29,7 +29,7 @@ import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 /**
  * Swagger2的接口配置
  * 
- * @author ruoyi
+ * @author hinana
  */
 @EnableSwagger2
 @EnableKnife4j

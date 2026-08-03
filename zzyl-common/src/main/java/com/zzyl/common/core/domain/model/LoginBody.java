@@ -3,7 +3,7 @@ package com.zzyl.common.core.domain.model;
 /**
  * 用户登录对象
  * 
- * @author ruoyi
+ * @author hinana
  */
 public class LoginBody
 {

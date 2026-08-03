@@ -16,7 +16,7 @@ import com.zzyl.common.utils.SecurityUtils;
 /**
  * 数据脱敏序列化过滤
  *
- * @author ruoyi
+ * @author hinana
  */
 public class SensitiveJsonSerializer extends JsonSerializer<String> implements ContextualSerializer
 {

@@ -3,7 +3,7 @@ package com.zzyl.common.enums;
 /**
  * 操作人类别
  * 
- * @author ruoyi
+ * @author hinana
  */
 public enum OperatorType
 {
